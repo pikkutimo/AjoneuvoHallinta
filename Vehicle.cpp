@@ -13,8 +13,8 @@ Vehicle::~Vehicle()
     mNumberOfVehicles--;
 }
 
-Vehicle::Vehicle(const std::string& registration, const int& year, const Person& person)
- : mRegistration{ registration }, mYear{ year }, mOwner{ std::make_shared<Person>( person )}
+Vehicle::Vehicle(const std::string& registration, const int& year, const std::shared_ptr<Person>& person)
+ : mRegistration{ registration }, mYear{ year }, mOwner{ person }
 {
     mNumberOfVehicles++;
 }
@@ -72,4 +72,9 @@ void Vehicle::printVehicleDetails() const
     std::cout << mYear << std::endl;
     if (mOwner)
         mOwner->printPersonDetails();
+}
+
+void Vehicle::printVehicleOutline() const
+{
+    std::cout << "Registration: " << getRegistration() << " Model year: " << getYear() << std::endl;
 }

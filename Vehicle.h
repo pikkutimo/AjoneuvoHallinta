@@ -14,7 +14,7 @@ class Vehicle {
         static int mNumberOfVehicles;
         Vehicle();
         ~Vehicle();
-        Vehicle(const std::string& registration, const int& year, const Person& person);
+        Vehicle(const std::string& registration, const int& year, const std::shared_ptr<Person>& person);
         Vehicle(const std::string& registration, const int& year, const std::string& name, const int& age, const Address& address);
         Vehicle(const std::string& registration, const int& year, const std::string& name, const int& age, const std::string& streetAddress, const std::string& postalNumber, const std::string& postalBranch);
         void setRegistration(const std::string& registration);
@@ -25,4 +25,5 @@ class Vehicle {
         std::shared_ptr<Person> getOwner() const;
         void transferOwnership(std::shared_ptr<Person> person);
         virtual void printVehicleDetails() const;
+        virtual void printVehicleOutline() const;
 };

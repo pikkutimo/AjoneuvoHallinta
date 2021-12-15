@@ -8,7 +8,7 @@ Truck::Truck()
 Truck::~Truck()
 {}
 
-Truck::Truck(const std::string& registration, const int& year,  const Person& person, const std::string& make, const std::string& model, const std::string& body, const std::string& fueltype, 
+Truck::Truck(const std::string& registration, const int& year,  const std::shared_ptr<Person>& person, const std::string& make, const std::string& model, const std::string& body, const std::string& fueltype, 
 const std::string& transmission, const std::string& engine, const std::string& mileage, const std::string& cargoCapacity)
  : Car{ registration, year, person, make, model, body, fueltype, transmission, engine, mileage }, mCargoCapacity{ cargoCapacity }
 {}

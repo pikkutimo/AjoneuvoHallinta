@@ -8,7 +8,7 @@ Car::Car()
 Car::~Car()
 {}
 
-Car::Car(const std::string& registration, const int& year, const Person& person, const std::string& make, const std::string& model, const std::string& body, const std::string& fueltype, const std::string& transmission, const std::string& engine, const std::string& mileage)
+Car::Car(const std::string& registration, const int& year, const std::shared_ptr<Person>& person, const std::string& make, const std::string& model, const std::string& body, const std::string& fueltype, const std::string& transmission, const std::string& engine, const std::string& mileage)
  : Vehicle{ registration, year, person }, mMake{ make }, mModel{ model }, mBody{ body }, mFuelType{ fueltype }, mTransmission{ transmission }, mEngine{ engine }, mMileage{ mileage }
 {}
 
@@ -107,4 +107,9 @@ void Car::printVehicleDetails() const
     std::cout << "Transmission: " << getTransmission() << std::endl;
     std::cout << "Engine: " << getEngine() << std::endl;
     std::cout << "Mileage: " << getMileage() << " km" << std::endl;
+}
+
+void Car::printVehicleOutline() const
+{
+    std::cout << "Registration: " << getRegistration() << " Model year: " << getYear() << " Make: " << getMake() << " Model: " << getModel() <<  std::endl;
 }

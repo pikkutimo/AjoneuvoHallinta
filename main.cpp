@@ -6,45 +6,88 @@
 #include "Bus.h"
 #include "MilitaryVehicle.h"
 #include "VehicleRegister.h"
+#include "Tools.h"
 #include<iostream>
 #include<memory>
-
-// class OmaKuuntelija : public HenkiloLisattyObserver {
-//     public:
-//         OmaKuuntelija() = default;
-//         virtual void henkiloLisatty(const std::string& aNimi) {
-//             std::cout << "Event saatu. Lisätty henkilö: " << aNimi << std::endl;
-//         }
-// };
+#include<limits>
+#include<ios>
 
 
 int main()
 {
     auto vehicleRegister = VehicleRegister::getInstance();
 
-    Address address;
-    Person person;
-    
-    Vehicle vehicleTest("oii-302", 2000, person);
+    Person test1("Matti", 23, "Tonttilammintie 3", "34302", "Poikelus");
+    auto person1 = std::make_shared<Person>(test1);
+    Person test2("Misa", 24, "Panttilammintie 3", "66666", "Pori");
+    auto person2 = std::make_shared<Person>(test2);
+    Person test3("Maija", 25, "Korttilammintie 3", "11111", "Siikalatva");
+    auto person3 = std::make_shared<Person>(test3);
+    Person test4("Marika", 26, "Vapaalammintie 3", "68512", "Koilismaa");
+    auto person4 = std::make_shared<Person>(test4);
+    Person test5("Minna", 27, "Ohjelammintie 3", "35815", "Ullava");
+    auto person5 = std::make_shared<Person>(test5);
 
-    Person test("matti", 23, "Tonntilamm 3", "33432", "Kuolio");
-    Person test2("katriina", 24, "Koiramäki", "14132", "Posio");
-    Vehicle vehicle("ZIY-876", 1900, test);
-    Car testCar("zbc-123", 1999, test, "Toyota", "Prius", "Hatchback", "Electric", "Automatic", "VVT 23", "10000");
-    Truck testTruck("WER-987", 2010, test, "Volvo", "PoS", "MAC", "Diesel", "Manual", "Mauser 12309", "240000", "1000000");
-    Bus testBus("KUE-234", 2018, test, "Volvo", "PoS", "Nysse", "Diesel", "Manual", "Mauser 12309", "2240000", "55");
-    testBus.transferOwnership(std::make_shared<Person>(test2));
-    MilitaryVehicle tank("JNE-123", 2018, test, "Panther", "PoS", "V4", "Diesel", "Manual", "Mauser 12309", "224000", 3, 67, "105mm cannon, 12,7mm machinegun");
+    Car testCar("ZBC-123", 1999, person1, "Toyota", "Prius", "Hatchback", "Electric", "Automatic", "VVT 23", "10000");
+    Truck testTruck("WER-987", 2009, person2, "Tesla", "PoS", "CyberTruck", "Electric", "-", "ElonX", "240000", "1000000");
+    Bus testBus("KUE-234", 2019, person3, "Volvo", "PoS", "Nysse", "Diesel", "Manual", "Mauser 12309", "2240000", "55");
+    MilitaryVehicle testTank("JNE-123", 1989, person4, "Panther", "PoS", "V4", "Diesel", "Manual", "Mauser 12309", "224000", 3, 67, "105mm cannon, 12,7mm machinegun");
+    Car testVan("OTA-313", 1979, person5, "Ford", "Transit", "Van", "Diesel", "Manual", "Cosworth", "123000");
 
     vehicleRegister->addVehicle(std::make_shared<Car>(testCar));
     vehicleRegister->addVehicle(std::make_shared<Bus>(testBus));
+    vehicleRegister->addVehicle(std::make_shared<Car>(testVan));
+    vehicleRegister->addVehicle(std::make_shared<Truck>(testTruck));
+    vehicleRegister->addVehicle(std::make_shared<MilitaryVehicle>(testTank));
 
+    int menu{0};
+    bool isOn{true};
+    
+    while(isOn)
+    {
+        PrintMenu();
+        std::cout << "******************************************************************************************" << std::endl;
+        std::cout << "ENTER:: ";
+        std::cin >> menu;
 
-    std::cout << "=================" << std::endl;
+        switch (menu) {
+        case 1:
+            std::cout << "******************************************************************************************" << std::endl;
+            vehicleRegister->printVehiclesOutline();
+            break;
+        case 2:
+            std::cout << "******************************************************************************************" << std::endl;
+            vehicleRegister->printVehiclesDetails();
+            break;
+        case 3:
+            MenuAddVehicle();
+            break;
+        case 4:
+            RemoveVehicle();
+            break;
+        case 5:
+            SearchVehicle();
+            break;
+        case 6:
+            SortVehicles();
+            break;
+        case 7:
+            EditVehicle();
+            break;
+        case 8:
+            TransferOwnership();
+            break;
+        case 9:
+            isOn=false;
+        default:
+            menu = 0;
+            PrintMenu();
+            break;
+        }
+    }
 
-    std::cout << "There are " << Vehicle::mNumberOfVehicles << " vehicles total." << std::endl;
-    std::cout << "The register contains following vehicles: " << std::endl;
-    vehicleRegister->printVehicles();
+    std::cout << std::endl;
+    std::cout << "Goodbye!" << std::endl;
 
     return 0;
 }

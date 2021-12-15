@@ -8,7 +8,7 @@ Bus::Bus()
 Bus::~Bus()
 {}
 
-Bus::Bus(const std::string& registration, const int& year,  const Person& person, const std::string& make, const std::string& model, const std::string& body, const std::string& fueltype, 
+Bus::Bus(const std::string& registration, const int& year,  const std::shared_ptr<Person>& person, const std::string& make, const std::string& model, const std::string& body, const std::string& fueltype, 
 const std::string& transmission, const std::string& engine, const std::string& mileage, const std::string& passangerCapacity)
  : Car{ registration, year, person, make, model, body, fueltype, transmission, engine, mileage }, mPassangerCapacity{ passangerCapacity }
 {}

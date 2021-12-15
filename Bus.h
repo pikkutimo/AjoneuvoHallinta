@@ -12,7 +12,7 @@ class Bus : public Car {
     public:
         Bus();
         ~Bus();
-        Bus(const std::string& registration, const int& year, const Person& person, const std::string& make, const std::string& model, const std::string& body, const std::string& fueltype, const std::string& transmission, const std::string& engine, const std::string& mileage, const std::string& passangerCapacity);
+        Bus(const std::string& registration, const int& year, const std::shared_ptr<Person>& person, const std::string& make, const std::string& model, const std::string& body, const std::string& fueltype, const std::string& transmission, const std::string& engine, const std::string& mileage, const std::string& passangerCapacity);
         Bus(const std::string& make, const std::string& model, const std::string& body, const std::string& fueltype, const std::string& transmission, const std::string& engine, const std::string& mileage, const std::string& passangerCapacity);
         void setPassangerCapacity(const std::string& make);
         std::string getPassangerCapacity() const;

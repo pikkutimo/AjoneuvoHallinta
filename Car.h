@@ -18,7 +18,7 @@ class Car : public Vehicle {
     public:
         Car();
         ~Car();
-        Car(const std::string& registration, const int& year, const Person& person, const std::string& make, const std::string& model, const std::string& body, const std::string& fueltype, const std::string& transmission, const std::string& engine, const std::string& mileage);
+        Car(const std::string& registration, const int& year, const std::shared_ptr<Person>& person, const std::string& make, const std::string& model, const std::string& body, const std::string& fueltype, const std::string& transmission, const std::string& engine, const std::string& mileage);
         Car(const std::string& make, const std::string& model, const std::string& body, const std::string& fueltype, const std::string& transmission, const std::string& engine, const std::string& mileage);
         void setMake(const std::string& make);
         void setModel(const std::string& model);
@@ -36,4 +36,5 @@ class Car : public Vehicle {
         std::string getMileage() const;
         virtual std::string honkHorn() const;
         void printVehicleDetails() const override;
+        void printVehicleOutline() const final;
 };

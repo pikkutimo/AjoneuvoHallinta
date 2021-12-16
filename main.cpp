@@ -11,6 +11,7 @@
 #include<memory>
 #include<limits>
 #include<ios>
+#include<regex>
 
 
 int main()
@@ -40,16 +41,18 @@ int main()
     vehicleRegister->addVehicle(std::make_shared<Truck>(testTruck));
     vehicleRegister->addVehicle(std::make_shared<MilitaryVehicle>(testTank));
 
-    int menu{0};
+    std::string input;
     bool isOn{true};
+    std::regex intExpression{"[0-9]"};
     
     while(isOn)
     {
         PrintMenu();
         std::cout << "******************************************************************************************" << std::endl;
         std::cout << "ENTER:: ";
-        std::cin >> menu;
-
+        InputValidator(input, intExpression);
+        int menu = std::stoi(input);
+    
         switch (menu) {
         case 1:
             std::cout << "******************************************************************************************" << std::endl;

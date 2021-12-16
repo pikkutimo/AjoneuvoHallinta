@@ -11,6 +11,7 @@
 #include<memory>
 #include<limits>
 #include<ios>
+#include<regex>
 
 
 void RemoveVehicle();
@@ -28,3 +29,4 @@ void Editor(std::shared_ptr<Vehicle>& vehicle);
 void EditVehicle();
 void RegisterNewOwner(std::shared_ptr<Vehicle>& vehicle);
 void TransferOwnership();
+void InputValidator(std::string& input, const std::regex& ruleExpression);

@@ -7,10 +7,10 @@ void RemoveVehicle() {
     std::cout << "******************************************************************************************" << std::endl;
     std::cout << "Removing Vehicle" << std::endl;
     std::cout << "******************************************************************************************" << std::endl;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
     std::cout << std::endl;
     std::cout << "Registration: " << std::endl;
-    std::getline(std::cin, registration);
+    std::regex registrationExpression{"[A-Z]{3}-[0-9]{3}"};
+    InputValidator(registration, registrationExpression);
     vehicleRegister->removeVehicle(registration);
 
     return;
@@ -22,7 +22,7 @@ std::shared_ptr<Person> CreateOwner() {
     std::string postalnumber;
     std::string city;
     std::string temp;
-    int age;
+    std::regex ageExpression{"[0-9]+"};
 
     std::cout << "******************************************************************************************" << std::endl;
     std::cout << "Creating owner" << std::endl;
@@ -36,8 +36,8 @@ std::shared_ptr<Person> CreateOwner() {
     std::cout << "City :"<< std::endl;
     std::getline(std::cin, city);
     std::cout << "Age :"<< std::endl;
-    std::getline(std::cin, temp);
-    age = std::stoi(temp);
+    InputValidator(temp, ageExpression);
+    int age = std::stoi(temp);
 
     auto person = std::make_shared<Person>(name, age, street, postalnumber, city);
 
@@ -46,7 +46,7 @@ std::shared_ptr<Person> CreateOwner() {
 
 void CreateCar(){
     std::string registration;
-    int year;
+    std::regex registrationExpression{"[A-Z]{3}-[0-9]{3}"};
     std::string temp;
     std::string make;
     std::string model;
@@ -55,14 +55,14 @@ void CreateCar(){
     std::string transmission;
     std::string engine;
     std::string mileage;
+    std::regex yearExpression{"[0-9]+"};
 
     std::cout << "******************************************************************************************" << std::endl;
     std::cout << "Creating car" << std::endl;
     std::cout << "******************************************************************************************" << std::endl;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
     std::cout << std::endl;
     std::cout << "Registration: " << std::endl;
-    std::getline(std::cin, registration);
+    InputValidator(registration, registrationExpression);
     std::cout << "Make (E.g. Toyota, Chervolet) :"<< std::endl;
     std::getline(std::cin, make);
     std::cout << "Model:" << std::endl;
@@ -78,9 +78,8 @@ void CreateCar(){
     std::cout << "Mileage: " << std::endl;
     std::getline(std::cin, mileage);
     std::cout << "Model Year: " << std::endl;
-    std::getline(std::cin, temp);
-    year = std::stoi(temp);
-    // std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+    InputValidator(temp, yearExpression);
+    int year = std::stoi(temp);
 
     std::shared_ptr<Person> person = CreateOwner();
     auto car = std::make_shared<Car>(registration, year, person, make, model, body, fuel, transmission, engine, mileage);
@@ -94,8 +93,9 @@ void CreateCar(){
 void CreateMilitaryVehicle(){
     std::shared_ptr<MilitaryVehicle> militaryVehicle;
     std::string registration;
-    int year;
+    std::regex registrationExpression{"[A-Z]{3}-[0-9]{3}"};
     std::string temp;
+    std::regex numberExpression{"[0-9]+"};
     std::string make;
     std::string model;
     std::string body;
@@ -104,19 +104,16 @@ void CreateMilitaryVehicle(){
     std::string engine;
     std::string mileage;
     std::string armament;
-    int crew;
-    int armorThickness;
 
     std::cout << "******************************************************************************************" << std::endl;
     std::cout << "Creating Military Vehicle" << std::endl;
     std::cout << "******************************************************************************************" << std::endl;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
     std::cout << std::endl;
     std::cout << "Registration: " << std::endl;
-    std::getline(std::cin, registration);
+    InputValidator(registration, registrationExpression);
     std::cout << "Model Year: " << std::endl;
-    std::getline(std::cin, temp);
-    year = std::stoi(temp);
+    InputValidator(temp, numberExpression);
+    int year = std::stoi(temp);
     std::cout << "Make (E.g. Toyota, Chervolet) :"<< std::endl;
     std::getline(std::cin, make);
     std::cout << "Model:" << std::endl;
@@ -134,11 +131,11 @@ void CreateMilitaryVehicle(){
     std::cout << "Armament: " << std::endl;
     std::getline(std::cin, armament);
     std::cout << "Crew: " << std::endl;
-    std::getline(std::cin, temp);
-    crew = std::stoi(temp);
+    InputValidator(temp, numberExpression);
+    int crew = std::stoi(temp);
     std::cout << "Armor Thickness: " << std::endl;
-    std::getline(std::cin, temp);
-    armorThickness = std::stoi(temp);
+    InputValidator(temp, numberExpression);
+    int armorThickness = std::stoi(temp);
 
     std::shared_ptr<Person> person = CreateOwner();
     auto tank = std::make_shared<MilitaryVehicle>(registration, year, person, make, model, body, fuel, transmission, engine, mileage, crew, armorThickness, armament);
@@ -154,7 +151,7 @@ void CreateMilitaryVehicle(){
 
 void CreateBus(){
     std::string registration;
-    int year;
+    std::regex registrationExpression{"[A-Z]{3}-[0-9]{3}"};
     std::string make;
     std::string model;
     std::string body;
@@ -163,15 +160,15 @@ void CreateBus(){
     std::string engine;
     std::string mileage;
     std::string temp;
+    std::regex numberExpression{"[0-9]+"};
     std::string passengetCapacity;
 
     std::cout << "******************************************************************************************" << std::endl;
     std::cout << "Creating Bus" << std::endl;
     std::cout << "******************************************************************************************" << std::endl;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
     std::cout << std::endl;
     std::cout << "Registration: " << std::endl;
-    std::getline(std::cin, registration);
+    InputValidator(registration, registrationExpression);
     std::cout << "Make (E.g. Toyota, Chervolet) :"<< std::endl;
     std::getline(std::cin, make);
     std::cout << "Model:" << std::endl;
@@ -187,16 +184,13 @@ void CreateBus(){
     std::cout << "Mileage: " << std::endl;
     std::getline(std::cin, mileage);
     std::cout << "Model Year: " << std::endl;
-    std::getline(std::cin, temp);
-    year = std::stoi(temp);
+    InputValidator(temp, numberExpression);
+    int year = std::stoi(temp);
     std::cout << "Passanger Capacity: " << std::endl;
     std::getline(std::cin, passengetCapacity);
 
     std::shared_ptr<Person> person = CreateOwner();
     auto bus = std::make_shared<Bus>(registration, year, person, make, model, body, fuel, transmission, engine, mileage, passengetCapacity);
-
-    // Bus(const std::string& registration, const int& year, const std::shared_ptr<Person>& person, const std::string& make, const std::string& model, const std::string& body, 
-    // const std::string& fueltype, const std::string& transmission, const std::string& engine, const std::string& mileage, const std::string& passangerCapacity);
     auto vehicleRegister = VehicleRegister::getInstance();
     vehicleRegister->addVehicle(bus);
 
@@ -205,7 +199,7 @@ void CreateBus(){
 
 void CreateTruck(){
     std::string registration;
-    int year;
+    std::regex registrationExpression{"[A-Z]{3}-[0-9]{3}"};
     std::string temp;
     std::string make;
     std::string model;
@@ -215,14 +209,14 @@ void CreateTruck(){
     std::string engine;
     std::string mileage;
     std::string cargoCapacity;
+    std::regex numberExpression{"[0-9]+"};
 
     std::cout << "******************************************************************************************" << std::endl;
     std::cout << "Creating Truck" << std::endl;
     std::cout << "******************************************************************************************" << std::endl;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
     std::cout << std::endl;
     std::cout << "Registration: " << std::endl;
-    std::getline(std::cin, registration);
+    InputValidator(registration, registrationExpression);
     std::cout << "Make (E.g. Toyota, Chervolet) :"<< std::endl;
     std::getline(std::cin, make);
     std::cout << "Model:" << std::endl;
@@ -238,16 +232,13 @@ void CreateTruck(){
     std::cout << "Mileage: " << std::endl;
     std::getline(std::cin, mileage);
     std::cout << "Model Year: " << std::endl;
-    std::getline(std::cin, temp);
-    year = std::stoi(temp);
+    InputValidator(temp, numberExpression);
+    int year = std::stoi(temp);
     std::cout << "Cargo Capacity: " << std::endl;
     std::getline(std::cin, cargoCapacity);
 
     std::shared_ptr<Person> person = CreateOwner();
     auto truck = std::make_shared<Truck>(registration, year, person, make, model, body, fuel, transmission, engine, mileage, cargoCapacity);
-
-    // Bus(const std::string& registration, const int& year, const std::shared_ptr<Person>& person, const std::string& make, const std::string& model, const std::string& body, 
-    // const std::string& fueltype, const std::string& transmission, const std::string& engine, const std::string& mileage, const std::string& passangerCapacity);
     auto vehicleRegister = VehicleRegister::getInstance();
     vehicleRegister->addVehicle(truck);
 
@@ -255,7 +246,8 @@ void CreateTruck(){
 }
 
 void MenuAddVehicle(){
-    int addVehicleChoise{0};
+    std::string input;
+    std::regex menuExpression{"[1-5]"};
 
     std::cout << "******************************************************************************************" << std::endl;
     std::cout << std::endl;
@@ -268,7 +260,8 @@ void MenuAddVehicle(){
     std::cout << "******************************************************************************************" << std::endl;
     std::cout << std::endl;
     std::cout << "ENTER:: ";
-    std::cin >> addVehicleChoise;
+    InputValidator(input, menuExpression);
+    int addVehicleChoise = std::stoi(input);
 
     switch (addVehicleChoise) {
         case 1:
@@ -321,17 +314,19 @@ void PrintMenu() {
 }
 
 void SearchVehicle() {
-    std::string search;
+    std::string input;
+    std::regex menuExpression{"[1-4]"};
+    std::regex registrationExpression{"[A-Z]{3}-[0-9]{3}"};
     auto vehicleRegister = VehicleRegister::getInstance();
     std::shared_ptr<Vehicle> searchResult{ nullptr };
     std::vector<std::shared_ptr<Vehicle>> resultVector{nullptr};
+    std::regex numberExpression{"[0-9]+"};
     int year;
-    int searchMenu;
+
 
     std::cout << "******************************************************************************************" << std::endl;
     std::cout << "Searching Vehicle" << std::endl;
     std::cout << "******************************************************************************************" << std::endl;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
     std::cout << std::endl;
     
     std::cout << std::endl;
@@ -344,31 +339,28 @@ void SearchVehicle() {
     std::cout << "******************************************************************************************" << std::endl;
     std::cout << std::endl;
     std::cout << "ENTER:: ";
-    std::cin >> searchMenu;
+    InputValidator(input, menuExpression);
+    int searchMenu = std::stoi(input); 
 
     switch (searchMenu) {
         case 1:
             std::cout << "******************************************************************************************" << std::endl;
             std::cout << "The registration:" << std::endl;
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-            std::getline(std::cin, search);
-            searchResult = vehicleRegister->getVehiclesByRegistration(search);
+            InputValidator(input, registrationExpression);
+            searchResult = vehicleRegister->getVehiclesByRegistration(input);
             searchResult->printVehicleDetails();
             break;
         case 2:
             std::cout << "******************************************************************************************" << std::endl;
             std::cout << "The Owners Name:" << std::endl;
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-            std::getline(std::cin, search);
-            searchResult = vehicleRegister->getVehiclesByOwner(search);
+            std::getline(std::cin, input);
+            searchResult = vehicleRegister->getVehiclesByOwner(input);
             searchResult->printVehicleDetails();
             break;
         case 3:
             std::cout << "******************************************************************************************" << std::endl;
-            std::cout << "The Year:" << std::endl;
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-            std::getline(std::cin, search);
-            year = std::stoi(search);
+            InputValidator(input, numberExpression);
+            year = std::stoi(input);
             resultVector = vehicleRegister->getVehicleByYear(year);
             
             for (auto &veh : resultVector)
@@ -390,13 +382,13 @@ void SearchVehicle() {
 }
 
 void SortVehicles() {
-    int sortMenu{0};
+    std::string input;
+    std::regex menuExpression{"[1-3]"};
     auto vehicleRegister = VehicleRegister::getInstance();
 
     std::cout << "******************************************************************************************" << std::endl;
     std::cout << "SORT THE LIST OF VEHICLES" << std::endl;
     std::cout << "******************************************************************************************" << std::endl;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
     std::cout << std::endl;
     
     std::cout << std::endl;
@@ -407,7 +399,8 @@ void SortVehicles() {
     std::cout << "******************************************************************************************" << std::endl;
     std::cout << std::endl;
     std::cout << "ENTER:: ";
-    std::cin >> sortMenu;
+    InputValidator(input, menuExpression);
+    int sortMenu = std::stoi(input);
 
     switch (sortMenu) {
         case 1:
@@ -419,16 +412,17 @@ void SortVehicles() {
         default:
             break;
         }
-    
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 
     return;
 }
 
 void Editor(std::shared_ptr<Vehicle>& vehicle) {
     std::string temp;
+    std::regex menuExpression{"[1-3]"};
+    std::regex registrationExpression{"[A-Z]{3}-[0-9]{3}"};
+    std::regex numberExpression{"[0-9]+"};
     int year;
-    int editMenu;
+
     std::cout << "******************************************************************************************" << std::endl;
     std::cout << "EDIT" << std::endl;
     std::cout << "******************************************************************************************" << std::endl;
@@ -441,20 +435,19 @@ void Editor(std::shared_ptr<Vehicle>& vehicle) {
     std::cout << "******************************************************************************************" << std::endl;
     std::cout << std::endl;
     std::cout << "ENTER:: ";
-    std::cin >> editMenu;
+    InputValidator(temp, menuExpression);
+    int editMenu = std::stoi(temp);
 
     switch (editMenu)
     {
         case 1:
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
             std::cout << "New registration? " << std::endl;
-            std::getline(std::cin, temp);
+            InputValidator(temp, registrationExpression);
             vehicle->setRegistration(temp);
             break;
         case 2:
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
             std::cout << "New Year? " << std::endl;
-            std::getline(std::cin, temp);
+            InputValidator(temp, numberExpression);
             year = std::stoi(temp);
             vehicle->setYear(year);
             break;
@@ -467,16 +460,16 @@ void Editor(std::shared_ptr<Vehicle>& vehicle) {
 }
 
 void EditVehicle() {
-    std::string search;
+    std::string input;
     auto vehicleRegister = VehicleRegister::getInstance();
     std::shared_ptr<Vehicle> searchResult{ nullptr };
-    int year;
-    int searchMenu;
+    std::regex menuExpression{"[1-3]"};
+    std::regex registrationExpression{"[A-Z]{3}-[0-9]{3}"};
+    std::regex numberExpression{"[0-9]+"};
 
     std::cout << "******************************************************************************************" << std::endl;
     std::cout << "SEARCH VEHICLE TO EDIT" << std::endl;
     std::cout << "******************************************************************************************" << std::endl;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
     std::cout << std::endl;
     
     std::cout << std::endl;
@@ -488,24 +481,23 @@ void EditVehicle() {
     std::cout << "******************************************************************************************" << std::endl;
     std::cout << std::endl;
     std::cout << "ENTER:: ";
-    std::cin >> searchMenu;
+    InputValidator(input, menuExpression);
+    int searchMenu = std::stoi(input);
 
     switch (searchMenu) {
         case 1:
             std::cout << "******************************************************************************************" << std::endl;
             std::cout << "The registration:" << std::endl;
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-            std::getline(std::cin, search);
-            searchResult = vehicleRegister->getVehiclesByRegistration(search);
+            InputValidator(input, registrationExpression);
+            searchResult = vehicleRegister->getVehiclesByRegistration(input);
             searchResult->printVehicleDetails();
             Editor(searchResult);
             break;
         case 2:
             std::cout << "******************************************************************************************" << std::endl;
             std::cout << "The Owners Name:" << std::endl;
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-            std::getline(std::cin, search);
-            searchResult = vehicleRegister->getVehiclesByOwner(search);
+            std::getline(std::cin, input);
+            searchResult = vehicleRegister->getVehiclesByOwner(input);
             searchResult->printVehicleDetails();
             Editor(searchResult);
             break;
@@ -522,12 +514,14 @@ void EditVehicle() {
 }
 
 void RegisterNewOwner(std::shared_ptr<Vehicle>& vehicle) {
-    int searchMenu;
-    int index;
+    std::regex menuExpression{"[1-3]"};
+    std::regex numberExpression{"[0-9]+"};
     std::string temp;
     std::vector<std::shared_ptr<Person>> owners{ nullptr };
     auto vehicleRegister = VehicleRegister::getInstance();
     std::shared_ptr<Person> person;
+    int year;
+    int index;
 
     std::cout << "******************************************************************************************" << std::endl;
     std::cout << "CHOOSE NEW OWNER" << std::endl;
@@ -541,8 +535,8 @@ void RegisterNewOwner(std::shared_ptr<Vehicle>& vehicle) {
     std::cout << "******************************************************************************************" << std::endl;
     std::cout << std::endl;
     std::cout << "ENTER:: ";
-    std::cin >> searchMenu;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+    InputValidator(temp, menuExpression);
+    int searchMenu = std::stoi(temp);
 
     switch (searchMenu) {
         case 1:
@@ -559,7 +553,7 @@ void RegisterNewOwner(std::shared_ptr<Vehicle>& vehicle) {
             }
             std::cout << std::endl;
             std::cout << "The new owners index?" << std::endl;
-            std::getline(std::cin, temp);
+            InputValidator(temp, numberExpression);
             index = std::stoi(temp);
             vehicle->transferOwnership(owners.at(index));
             break;
@@ -581,13 +575,13 @@ void TransferOwnership() {
     auto vehicleRegister = VehicleRegister::getInstance();
     std::shared_ptr<Vehicle> searchResult{ nullptr };
     std::vector<std::shared_ptr<Person>> owners{ nullptr };
-    int year;
-    int searchMenu;
+    std::regex menuExpression{"[1-3]"};
+    std::regex numberExpression{"[0-9]+"};
+    std::regex registrationExpression{"[A-Z]{3}-[0-9]{3}"};
 
     std::cout << "******************************************************************************************" << std::endl;
     std::cout << "SEARCH VEHICLE TO TRANSFER" << std::endl;
     std::cout << "******************************************************************************************" << std::endl;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
     std::cout << std::endl;
     
     std::cout << std::endl;
@@ -599,28 +593,34 @@ void TransferOwnership() {
     std::cout << "******************************************************************************************" << std::endl;
     std::cout << std::endl;
     std::cout << "ENTER:: ";
-    std::cin >> searchMenu;
+    InputValidator(search, menuExpression);
+    int searchMenu = std::stoi(search);
 
     switch (searchMenu) {
         case 1:
             std::cout << "******************************************************************************************" << std::endl;
             std::cout << "The registration:" << std::endl;
             std::cout << "******************************************************************************************" << std::endl;
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-            std::getline(std::cin, search);
+            InputValidator(search, registrationExpression);
             searchResult = vehicleRegister->getVehiclesByRegistration(search);
-            searchResult->printVehicleDetails();
-            RegisterNewOwner(searchResult);
+            if (searchResult)
+            {
+                searchResult->printVehicleDetails();
+                RegisterNewOwner(searchResult);
+            }
+            
             break;
         case 2:
             std::cout << "******************************************************************************************" << std::endl;
             std::cout << "The Owners Name:" << std::endl;
             std::cout << "******************************************************************************************" << std::endl;
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
             std::getline(std::cin, search);
             searchResult = vehicleRegister->getVehiclesByOwner(search);
-            searchResult->printVehicleDetails();
-            RegisterNewOwner(searchResult);
+            if (searchResult)
+            {
+                searchResult->printVehicleDetails();
+                RegisterNewOwner(searchResult);
+            }
             break;
         case 3:
             std::cout << "******************************************************************************************" << std::endl;
@@ -629,6 +629,20 @@ void TransferOwnership() {
         default:
             std::cout << "Uknown item, returning to main menu." << std::endl;
             break;
+        }
+    
+    return;
+}
+
+void InputValidator(std::string& input, const std::regex& ruleExpression) {
+    while(true) {
+            std::getline(std::cin, input);
+            if (std::regex_match(input, ruleExpression)) {
+                break;
+            }
+
+            std::cout << "Invalid input." << std::endl;
+            std::cout << "ENTER:: ";
         }
     
     return;

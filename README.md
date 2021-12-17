@@ -46,3 +46,7 @@ The idea:
 - Simple database for vehicles, with one baseclass and separate subclasses for different types of vehicles
 - Every vehicle has also owner => Person class with attributes like the name, address etc.
 - Every person has an address => Address class with attributes for the street address etc.
+
+# Problems/What to implement
+- With the current implementation using std::smart_prt, the application suffers slicing problems using the std::vector with the Vehicle base class
+- When editing single vehicle, one should be able edit every property of the vehicle from the registration to the mileage in single sitting

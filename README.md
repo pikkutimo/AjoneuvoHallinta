@@ -4,6 +4,7 @@ Final exercise for course 5G00BM85-3006 Olio-ohjelmoinnin jatkokurssi (OOP advan
 ## The Assignment:
 
 **Finnish**
+
 Toteuta pieni, oliopohjainen datanhallintasovellus, jossa voit ylläpitää valitsemaasi dataa. Data voi olla esimerkiksi:
 
 Kirjoja
@@ -21,6 +22,7 @@ Itse ohjelma toimii yksinkertaisesti konsolisovelluksena. Konsolista käsin voit
 Toteuta ohjelma hyödyntäen modernia C++:aa ja kurssilla läpi käytyjä asioita niin paljon kuin (tarkoituksenmukaisesti) mahdollista. Ohjelmassa tulisi käyttää sopivasti ja soveltaen mm. smart pointereita, sopivaa muistinhallintaa, lambda -lausekkeita (esim. haussa, järjestämisessä tai data-alkioiden muokkaamisessa), staattista dataa (esim. oliolaskurit). Lisäksi toteutuksessa on hyödynnettävä vähintään yhtä modernilla C++:lla toteutettua GoF design patternia, esimerkiksi tunneilla käytävä singleton tai observer. Muuten itse toteuttamistapa on vapaa.
 
 **English**
+
 Create small, object based datamanagement application. The data can be for example:
 
 Books

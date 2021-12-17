@@ -37,7 +37,7 @@
 *.app
 
 # Other
-.vscode/**
-cache/**
+.vscode/
+cache/
 
 # End of https://www.toptal.com/developers/gitignore/api/c++

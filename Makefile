@@ -1,5 +1,5 @@
-HEADERS = $(shell ls *.h)
-SOURCES = $(shell ls *.cpp)
+HEADERS = $(shell ls src/*.h)
+SOURCES = $(shell ls src/*.cpp)
 
 CFLAGS = -W -Wall -std=c++17
 DEBUGFLAGS = -g

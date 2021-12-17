@@ -418,43 +418,93 @@ void SortVehicles() {
 
 void Editor(std::shared_ptr<Vehicle>& vehicle) {
     std::string temp;
-    std::regex menuExpression{"[1-3]"};
+    std::regex menuExpression{"[0-9]+"};
     std::regex registrationExpression{"[A-Z]{3}-[0-9]{3}"};
     std::regex numberExpression{"[0-9]+"};
     int year;
+    bool editorOn{true};
 
-    std::cout << "******************************************************************************************" << std::endl;
-    std::cout << "EDIT" << std::endl;
-    std::cout << "******************************************************************************************" << std::endl;
-    // std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-    std::cout << std::endl;
-    std::cout << "\t 1. REGISTRATION" << std::endl;
-    std::cout << "\t 2. YEAR" << std::endl;
-    std::cout << std::endl;
-    std::cout << "\t 3. CANCEL" << std::endl;
-    std::cout << "******************************************************************************************" << std::endl;
-    std::cout << std::endl;
-    std::cout << "ENTER:: ";
-    InputValidator(temp, menuExpression);
-    int editMenu = std::stoi(temp);
-
-    switch (editMenu)
+    while(editorOn)
     {
-        case 1:
-            std::cout << "New registration? " << std::endl;
-            InputValidator(temp, registrationExpression);
-            vehicle->setRegistration(temp);
-            break;
-        case 2:
-            std::cout << "New Year? " << std::endl;
-            InputValidator(temp, numberExpression);
-            year = std::stoi(temp);
-            vehicle->setYear(year);
-            break;
-        default:
-            break;
-    }
+        std::cout << "******************************************************************************************" << std::endl;
+        std::cout << "EDIT" << std::endl;
+        std::cout << "******************************************************************************************" << std::endl;
+        vehicle->printVehicleDetails();
+        std::cout << std::endl;
+        std::cout << "\t 1. REGISTRATION" << std::endl;
+        std::cout << "\t 2. YEAR" << std::endl;
+        std::cout << "\t 3. MAKE" << std::endl;
+        std::cout << "\t 4. MODEL" << std::endl;
+        std::cout << "\t 5. BODY" << std::endl;
+        std::cout << "\t 6. FUELTYPE" << std::endl;
+        std::cout << "\t 7. TRANSMISSION" << std::endl;
+        std::cout << "\t 8. ENGINE" << std::endl;
+        std::cout << "\t 9. MILEAGE" << std::endl;
+        std::cout << std::endl;
+        std::cout << "\t 10. CANCEL" << std::endl;
+        std::cout << "******************************************************************************************" << std::endl;
+        std::cout << std::endl;
+        std::cout << "ENTER:: ";
+        InputValidator(temp, menuExpression);
+        int editMenu = std::stoi(temp);
 
+        switch (editMenu)
+        {
+            case 1:
+                std::cout << "New registration? " << std::endl;
+                InputValidator(temp, registrationExpression);
+                vehicle->setRegistration(temp);
+                break;
+            case 2:
+                std::cout << "New Year? " << std::endl;
+                InputValidator(temp, numberExpression);
+                year = std::stoi(temp);
+                vehicle->setYear(year);
+                break;
+            case 3:
+                std::cout << "New make? " << std::endl;
+                std::getline(std::cin, temp);
+                vehicle->setMake(temp);
+                break;
+            case 4:
+                std::cout << "New model? " << std::endl;
+                std::getline(std::cin, temp);
+                vehicle->setModel(temp);
+                break;
+            case 5:
+                std::cout << "New bodytype? " << std::endl;
+                std::getline(std::cin, temp);
+                vehicle->setBody(temp);
+                break;
+            case 6:
+                std::cout << "New fueltype? " << std::endl;
+                std::getline(std::cin, temp);
+                vehicle->setFuelType(temp);
+                break;
+            case 7:
+                std::cout << "New transmission? " << std::endl;
+                std::getline(std::cin, temp);
+                vehicle->setTransmission(temp);
+                break;
+            case 8:
+                std::cout << "New engine? " << std::endl;
+                std::getline(std::cin, temp);
+                vehicle->setEngine(temp);
+                break;
+            case 9:
+                std::cout << "New mileage? " << std::endl;
+                InputValidator(temp, numberExpression);
+                vehicle->setMake(temp);
+                break;
+            case 10:
+                editorOn = false;
+                break;
+            default:
+                break;
+        }
+
+    }
+    
     return;
 
 }
@@ -490,7 +540,6 @@ void EditVehicle() {
             std::cout << "The registration:" << std::endl;
             InputValidator(input, registrationExpression);
             searchResult = vehicleRegister->getVehiclesByRegistration(input);
-            searchResult->printVehicleDetails();
             Editor(searchResult);
             break;
         case 2:
@@ -498,7 +547,6 @@ void EditVehicle() {
             std::cout << "The Owners Name:" << std::endl;
             std::getline(std::cin, input);
             searchResult = vehicleRegister->getVehiclesByOwner(input);
-            searchResult->printVehicleDetails();
             Editor(searchResult);
             break;
         case 3:

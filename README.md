@@ -1,4 +1,4 @@
-# AjoneuvoHallinta
+# VehicleRegister
 Final exercise for course 5G00BM85-3006 Olio-ohjelmoinnin jatkokurssi (OOP advanced course)
 
 ![Main menu](/img/Screen.png)
